@@ -1,5 +1,10 @@
 package edu.up.cs301.pig;
 
+import android.drm.DrmStore;
+
+import java.util.Random;
+
+import edu.up.cs301.game.Game;
 import edu.up.cs301.game.GameComputerPlayer;
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameInfo;
@@ -28,7 +33,23 @@ public class PigComputerPlayer extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-        // TODO  You will implement this method
+        if(this.playerNum == 0)
+            return;
+        else if (this.playerNum == 1)
+        {
+            double rand = Math.random();
+
+            if (rand < 0.5)
+            {
+                PigRollAction pigRollAction = new PigRollAction(this);
+                game.sendAction(pigRollAction);
+            }
+            else
+            {
+                PigHoldAction pigHoldAction = new PigHoldAction(this);
+                game.sendAction(pigHoldAction);
+            }
+        }
     }//receiveInfo
 
 }
